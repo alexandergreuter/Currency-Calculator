@@ -1,4 +1,4 @@
-<mat-toolbar color="accent">
+<mat-toolbar class="mat-elevation-z1" color="primary">
   <span>Calculate currencies</span>
 </mat-toolbar>
 <mat-progress-bar mode="query" *ngIf="loading"></mat-progress-bar>
@@ -10,7 +10,8 @@
 
       <mat-form-field>
         <mat-label>Convert from</mat-label>
-        <mat-select [(value)]="selected1">
+        <mat-select [(ngModel)]="selected1" name="convertFrom">
+          <mat-option value="">--</mat-option>
           <mat-option *ngFor="let country of countries" [value]="country">
             {{country.viewValue}}
           </mat-option>
@@ -22,18 +23,18 @@
                type="tel" pattern="[0-9]*">
       </mat-form-field>
 
-      <button mat-button (click)="swapCountries()">Swap countries</button>
+      <button mat-button (click)="swapCountries()" class="mat-elevation-z1">Swap countries</button>
 
       <mat-form-field>
         <mat-label>Convert to</mat-label>
-        <mat-select [(value)]="selected2">
+        <mat-select [(ngModel)]="selected2" name="convertTo">
           <mat-option *ngFor="let country of countries" [value]="country">
             {{country.viewValue}}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
-      <mat-label> Amount in {{selected2.key}}: {{convertedAmount()}}</mat-label>
+      <mat-label> Amount in {{selected2.key}}: {{converted()}}</mat-label>
 
     </form>
   </mat-card-content>

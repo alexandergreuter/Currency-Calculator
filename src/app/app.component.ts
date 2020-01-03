@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {WebService, Country} from './shared/web.service';
+import {Country, WebService} from './shared/web.service';
 
 @Component({
   selector: 'app-root',
@@ -26,14 +25,15 @@ export class AppComponent implements OnInit {
       for (const key in data) {
         this.countries.push({key: key.toString(), viewValue: data[key]});
       }
-      this.loading = false;
       this.selected1 = this.countries[0];
       this.selected2 = this.countries[1];
+      this.loading = false;
     });
   }
 
-  convertedAmount(): number {
-    return this.webService.convert(this.amount1, this.selected1, this.selected2);
+  converted(): number {
+    console.log(this.selected1);
+    return this.webService.convert(this.amount1, this.selected1, this.selected2, this.loading);
   }
 
   swapCountries() {
